@@ -12,23 +12,27 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class PrintCount {
     public static void main(String[] args) {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        new ThreadA(countDownLatch).start();
-        new ThreadB(countDownLatch).start();
+        CountDownLatch countDownLatch1 = new CountDownLatch(1);
+        CountDownLatch countDownLatch2 = new CountDownLatch(1);
+        new ThreadA(countDownLatch1,countDownLatch2).start();
+        new ThreadB(countDownLatch1,countDownLatch2).start();
     }
 }
 class ThreadA extends Thread{
-    private CountDownLatch countDownLatch;
-    public ThreadA(CountDownLatch countDownLatch){
-        this.countDownLatch = countDownLatch;
+    private CountDownLatch countDownLatch1;
+    private CountDownLatch countDownLatch2;
+
+    public ThreadA(CountDownLatch countDownLatch1,CountDownLatch countDownLatch2){
+        this.countDownLatch1 = countDownLatch1;
+        this.countDownLatch2 = countDownLatch2;
     }
     @Override
     public void run() {
         System.out.println("开始计算");
-        countDownLatch.countDown();
-        //让线程睡眠一会,等待线程B计算完成
+        countDownLatch1.countDown();
+        //等待线程B计算完成
         try {
-            Thread.sleep(200);
+            countDownLatch2.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -36,22 +40,26 @@ class ThreadA extends Thread{
     }
 }
 class ThreadB extends Thread{
-    private CountDownLatch countDownLatch;
-    public ThreadB(CountDownLatch countDownLatch){
-        this.countDownLatch = countDownLatch;
+    private CountDownLatch countDownLatch1;
+    private CountDownLatch countDownLatch2;
+
+    public ThreadB(CountDownLatch countDownLatch1,CountDownLatch countDownLatch2){
+        this.countDownLatch1 = countDownLatch1;
+        this.countDownLatch2 = countDownLatch2;
     }
     @Override
     public void run() {
         try {
             //等待线程A打印开始计算时开始计算并打印结果
-            countDownLatch.await();
-            int sum = 0;
-            for (int i = 1; i <= 100 ; i++) {
-                sum += i;
-            }
-            System.out.println("1--100所有数的累加和 = " + sum);
+            countDownLatch1.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        int sum = 0;
+        for (int i = 1; i <= 100 ; i++) {
+            sum += i;
+        }
+        System.out.println("1--100所有数的累加和 = " + sum);
+        countDownLatch2.countDown();
     }
 }
