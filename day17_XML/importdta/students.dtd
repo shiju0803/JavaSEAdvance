@@ -1,0 +1,7 @@
+<!ELEMENT students (student+)>
+        <!ELEMENT student (name|age|province|message)>
+        <!ATTLIST student id CDATA>
+        <!ELEMENT name (#PCDATA)>
+        <!ELEMENT age (#PCDATA)>
+        <!ELEMENT province (#PCDATA)>
+        <!ELEMENT message (#PCDATA)>

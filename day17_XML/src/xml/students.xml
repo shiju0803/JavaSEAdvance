@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--本xml文件用来描述多个学生信息-->
+<students>
+    <!--第一个学生信息-->
+    <student id="1">
+        <name>Tiga</name>
+        <age>23</age>
+        <province>平成</province>
+    </student>
+    <!--第二个学生信息-->
+    <student id="2">
+        <name>Dyna</name>
+        <age>24</age>
+        <province>日本</province>
+    </student>
+    <!--第三个学生信息-->
+    <student id="3">
+        <name>Gaia</name>
+        <age>25</age>
+        <province>圆谷</province>
+    </student>
+</students>

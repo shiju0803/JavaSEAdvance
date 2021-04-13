@@ -28,8 +28,9 @@ public class ReflectTest {
         Class clazz = Class.forName(className);
         //获取方法对象
         Method method1 = clazz.getMethod(methodName,int.class,int.class);
-        //获取字段对象
+        //获取字段
         Field field = clazz.getDeclaredField(fieldName);
+        //取消临时检查
         field.setAccessible(true);
         //创建学生对象
         Student s = (Student) clazz.newInstance();

@@ -5,11 +5,13 @@
     <student id="1">
         <name>张三</name>
         <age>23</age>
+        <province>长沙</province>
     </student>
     <!--第一个学生信息-->
     <student id="2">
         <name>黄桂田</name>
         <age>25</age>
+        <province>武汉</province>
         <message><![CDATA[<<<"'黄桂田是傻傻'">>>]]></message>
     </student>
 </students>
