@@ -23,21 +23,26 @@ public class TicketSales {
                 new ThreadPoolExecutor.AbortPolicy());
         //创建Tickets对象
         Tickets lock = new Tickets();
-
-        pool.submit(() -> {
-            while (true) {
-                synchronized (lock) {
-                    for (int i = 1; i <=4 ; i++) {
+        for (int i = 1; i <= 4; i++) {
+            pool.submit(() -> {
+                while (true) {
+                    synchronized (lock) {
                         if (lock.ticket <= 0) {
+                            System.out.println("票卖完了,886~");
                             break;
                         } else {
                             lock.ticket--;
-                            System.out.println("窗口" + i + "卖出了一张票,还剩" + lock.ticket + "张票");
+                            System.out.println(Thread.currentThread().getName() + "卖出了一张票,还剩" + lock.ticket + "张票");
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
         pool.shutdown();
     }
 }

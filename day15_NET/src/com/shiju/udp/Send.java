@@ -24,8 +24,8 @@ public class Send {
                 break;
             }
             //创建数据报包
-            byte[] bytes = s.getBytes("GBK");
-            DatagramPacket dp = new DatagramPacket(bytes, bytes.length, InetAddress.getByName("192.168.81.145"), 2425);
+            byte[] bytes = s.getBytes("UTF-8");
+            DatagramPacket dp = new DatagramPacket(bytes, bytes.length, InetAddress.getByName("127.0.0.1"), 5562);
             //有数据报发送数据
             ds.send(dp);
         }

@@ -14,7 +14,7 @@ import java.net.SocketException;
 public class Receive {
     public static void main(String[] args) throws IOException {
         // 创建发送端的Socket对象(DatagramSocket)
-        DatagramSocket ds = new DatagramSocket(5500);
+        DatagramSocket ds = new DatagramSocket(5562);
         //创建一个数据包，用于接收数据
         byte[] bytes = new byte[1024];
         DatagramPacket dp = new DatagramPacket(bytes,bytes.length);

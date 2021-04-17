@@ -10,16 +10,13 @@ import java.util.concurrent.FutureTask;
 public class Demo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         //线程开启之后需要执行里面的call方法
-        MyCallable mc = new MyCallable();
-
+        MyCallable callable = new MyCallable();
         //可以获取线程执行完毕之后的结果.也可以作为参数传递给Thread对象
-        FutureTask<String> ft = new FutureTask<>(mc);
-
+        FutureTask<String> ft = new FutureTask<>(callable);
         //创建线程对象
-        Thread t1 = new Thread(ft);
+        Thread t = new Thread(ft);
         //开启线程
-        t1.start();
-
+        t.start();
         String s = ft.get();//注意:此方法会阻塞.....要先start(),再get()
         System.out.println(s);
     }
